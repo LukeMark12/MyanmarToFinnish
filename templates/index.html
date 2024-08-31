@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Finnish Learning Assistant</title>
+</head>
+<body>
+    <h1>Learn Finnish</h1>
+
+    <!-- Text Input for Translation -->
+    <form action="/translate" method="post">
+        <label for="text">Enter Myanmar text:</label>
+        <input type="text" id="text" name="text">
+        <input type="submit" value="Translate to Finnish">
+    </form>
+
+    <!-- Speech Input for Translation -->
+    <form action="/speech" method="post">
+        <input type="submit" value="Speak to Translate">
+    </form>
+
+    <!-- Display Translation and Pronunciation Controls -->
+    {% if translated_text %}
+        <h2>Translation:</h2>
+        <p>Spoken Text: {{ spoken_text }}</p>
+        <p>{{ translated_text }}</p>
+        <form action="/speak" method="post">
+            <input type="hidden" name="text" value="{{ translated_text }}">
+            <input type="submit" value="Hear Pronunciation">
+        </form>
+    {% endif %}
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+
+    <!-- Navigation Links -->
+    <p><a href="{{ url_for('personalized') }}">Personalized Learning Paths</a></p>
+    <p><a href="{{ url_for('community') }}">Community Features</a></p>
+</body>
+</html>
